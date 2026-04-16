@@ -57,7 +57,7 @@ def make_population(n: int) -> list[Citizen]:
             )[0]
 
         income = random.gauss(100, 30) if job == "employed" else 0.0
-        income = max(20.0, income)
+        income = max(20.0, income) if job == "employed" else income
 
         religion = random.choices(
             ["christian", "atheist", "muslim", "other"],
