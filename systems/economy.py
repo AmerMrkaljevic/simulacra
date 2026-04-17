@@ -58,8 +58,8 @@ def tick(city: City, population: list[Citizen]) -> list[str]:
                 c.happiness = min(100.0, c.happiness + 10.0)
             events.append(f"Ny investering — {n} personer anställda")
 
-    # Gini coefficient (simplified)
-    wealths = sorted(c.wealth for c in population)
+    # Gini coefficient (simplified) — clamp to 0 so negative wealth doesn't corrupt formula
+    wealths = sorted(max(0.0, c.wealth) for c in population)
     n = len(wealths)
     if n > 0 and sum(wealths) > 0:
         cumsum = sum((i + 1) * w for i, w in enumerate(wealths))
