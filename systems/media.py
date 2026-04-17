@@ -36,7 +36,7 @@ def tick(city: City, population: list[Citizen]) -> list[str]:
 
     # Viral conspiracy event
     total_believers = sum(1 for c in population if c.radicalization > 60)
-    if total_believers / len(population) > _CONSPIRACY_THRESHOLD:
+    if population and total_believers / len(population) > _CONSPIRACY_THRESHOLD:
         theory = random.choice(_CONSPIRACY_THEORIES)
         events.append(f"Konspirationsteori viral: \"{theory}\" — {total_believers} tror på det")
         city.mayor_approval = max(0.0, city.mayor_approval - 5.0)

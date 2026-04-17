@@ -25,7 +25,7 @@ def tick(city: City, population: list[Citizen]) -> list[str]:
     cult_count = sum(1 for c in population if c.religion == "cult")
 
     # Cult tension when large enough
-    if cult_count / len(population) > _CULT_TENSION_PCT:
+    if population and cult_count / len(population) > _CULT_TENSION_PCT:
         events.append(f"Religiös spänning — sekten \"Sanningens väg\" har {cult_count} medlemmar")
 
     # Religious revival reduces crime temporarily
