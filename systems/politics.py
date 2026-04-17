@@ -51,8 +51,8 @@ def tick(city: City, population: list[Citizen]) -> list[str]:
         city.days_until_election = 0
         events.append(f"Politisk kris — snabbt val utlyst (godkännande: {city.mayor_approval:.0f}%)")
 
-    # Scheduled election
-    if city.days_until_election <= 0:
+    # Scheduled election (elif so snap announcement and actual vote don't fire same tick)
+    elif city.days_until_election <= 0:
         run_election(city, population)
         events.append(f"Val hållet — ny borgmästare: {city.mayor_name} ({city.mayor_party})")
 
