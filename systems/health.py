@@ -25,7 +25,7 @@ def tick(city: City, population: list[Citizen]) -> list[str]:
             c.happiness = max(0.0, c.happiness - 0.1)
 
         # Disease
-        disease_chance = _BASE_DISEASE_CHANCE * (1 + (100 - city.hospital_budget / 10_000))
+        disease_chance = max(0.0, _BASE_DISEASE_CHANCE * (1 + (100 - city.hospital_budget / 10_000)))
         if random.random() < disease_chance:
             severity = random.uniform(5, 25)
             c.health = max(0.0, c.health - severity * (1 - treatment_quality * 0.7))
