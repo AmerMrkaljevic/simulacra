@@ -48,13 +48,15 @@ def tick(city: City, population: list[Citizen]) -> list[str]:
 
     # Random: economic boom, new jobs
     if random.random() < _BOOM_CHANCE and unemployed:
-        n = random.randint(5, min(_BOOM_HIRES, len(unemployed)))
-        hired = random.sample(unemployed, n)
-        for c in hired:
-            c.job = "employed"
-            c.income = random.gauss(100, 20)
-            c.happiness = min(100.0, c.happiness + 10.0)
-        events.append(f"Ny investering — {n} personer anställda")
+        max_hire = min(_BOOM_HIRES, len(unemployed))
+        if max_hire >= 5:
+            n = random.randint(5, max_hire)
+            hired = random.sample(unemployed, n)
+            for c in hired:
+                c.job = "employed"
+                c.income = random.gauss(100, 20)
+                c.happiness = min(100.0, c.happiness + 10.0)
+            events.append(f"Ny investering — {n} personer anställda")
 
     # Gini coefficient (simplified)
     wealths = sorted(c.wealth for c in population)
